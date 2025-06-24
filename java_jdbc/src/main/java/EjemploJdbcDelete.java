@@ -3,10 +3,11 @@ import org.csubauste.java.jdbc.repositorio.IRepositorio;
 import org.csubauste.java.jdbc.repositorio.ProductoRepositorioImpl;
 import org.csubauste.java.jdbc.util.ConexionBaseDatos;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Date;
 
-public class EjemploJdbc
+public class EjemploJdbcDelete
 {
     public static void main(String[] args) {
         try(
@@ -28,12 +29,10 @@ public class EjemploJdbc
             repositorio.listar().forEach(System.out::println);
             System.out.println("==========================POR ID==========================");
             System.out.println(repositorio.porId(1L));
-            System.out.println("==========================INSERT==========================");
-            //Producto prod = new Producto(0L,"Teclado mecanico",500,new Date());
-            Producto prod = new Producto(3L,"Teclado Razer Mecanico",700,new Date());
-            repositorio.guardar(prod);
+            System.out.println("==========================DELETE==========================");
+
+            repositorio.eliminar(3L);
             repositorio.listar().forEach(System.out::println);
-            System.out.println("==========================Eliminar==========================");
 
         } catch (SQLException e) {
             e.printStackTrace();

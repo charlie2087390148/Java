@@ -56,16 +56,42 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
 
     @Override
     public void guardar(Producto o) {
+        String sql;
+        if (o.getId() != 0 && o.getId() > 0) {
+            sql = "Update productos set nombre = ? ,precio = ?  where id=?";
+        } else {
+            sql = "INSERT INTO productos( nombre,precio,fecha_registro) VALUES(?,?,?)";
+        }
+        try (PreparedStatement ps = getConection()
+                .prepareStatement(sql)
+        )
+        {
+            ps.setString(1,o.getNombre());
+            ps.setLong(2, o.getPrecio());
 
+            if (o.getId() != 0 && o.getId() > 0) {
+                ps.setLong(3, o.getId());
+            }else{
+                ps.setDate(3, new Date(o.getFecha_registro().getTime()));
+            }
+            ps.executeUpdate();
+
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
     @Override
     public void eliminar(Long id) {
+        try (PreparedStatement ps = getConection()
+                .prepareStatement("DELETE FROM productos WHERE id = ?")
+        ){
+            ps.setLong(1,id);
+            ps.executeUpdate();
 
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
     }
 
-    @Override
-    public void actualizar(Producto o) {
-
-    }
 }

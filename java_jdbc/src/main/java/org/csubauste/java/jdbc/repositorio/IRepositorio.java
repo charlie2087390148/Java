@@ -5,6 +5,5 @@ public interface IRepositorio<T> {
     T porId(Long id);
     void guardar(T t);
     void eliminar(Long id);
-    void actualizar(T t);
 
 }
