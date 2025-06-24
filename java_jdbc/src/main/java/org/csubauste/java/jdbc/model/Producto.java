@@ -49,4 +49,13 @@ public class Producto {
     public void setFecha_registro(Date fecha_registro) {
         this.fecha_registro = fecha_registro;
     }
+
+    @Override
+    public String toString() {
+        return  id +
+                ", " + nombre  +
+                ", " + precio +
+                ", " + fecha_registro
+                ;
+    }
 }

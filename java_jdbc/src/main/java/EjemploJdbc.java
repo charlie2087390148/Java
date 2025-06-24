@@ -20,8 +20,8 @@ public class EjemploJdbc
 //                System.out.println(resultado.getDate("fecha_registro"));
 //            }
             IRepositorio<Producto> repositorio = new ProductoRepositorioImpl();
-            repositorio.listar().forEach(p-> System.out.println(p.getNombre()));
-
+            repositorio.listar().forEach(System.out::println);
+            System.out.println(repositorio.porId(1L));
         } catch (SQLException e) {
             e.printStackTrace();
         }
