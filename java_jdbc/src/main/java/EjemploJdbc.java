@@ -1,15 +1,12 @@
+import org.csubauste.java.jdbc.util.ConexionBaseDatos;
+
 import java.sql.*;
 
 public class EjemploJdbc
 {
     public static void main(String[] args) {
-        //String url="jdbc:mysql://localhost:3306/curso_java?serverTimezone=UTC";
-        String url="jdbc:mysql://localhost:3306/curso_java?serverTimezone=America/Lima";
-        String usename ="root";
-        String pasword = "";
-
         try(
-                Connection conn = DriverManager.getConnection(url,usename,pasword);
+                Connection conn = ConexionBaseDatos.getInstance();
                 Statement stmt = conn.createStatement();
                 ResultSet resultado = stmt.executeQuery("Select * from productos")
             ) {
