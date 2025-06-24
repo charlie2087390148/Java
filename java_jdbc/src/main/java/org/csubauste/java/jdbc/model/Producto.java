@@ -8,6 +8,9 @@ public class Producto {
     private Integer precio;
     private Date fecha_registro;
 
+    public Producto() {
+    }
+
     public Producto(Long id, String nombre, Integer precio, Date fecha_registro) {
         this.id = id;
         this.nombre = nombre;
