@@ -10,20 +10,8 @@ import java.util.Date;
 public class EjemploJdbcDelete
 {
     public static void main(String[] args) {
-        try(
-                Connection conn = ConexionBaseDatos.getInstance()
-//                Statement stmt = conn.createStatement();
-//                ResultSet resultado = stmt.executeQuery("Select * from productos")
-            ) {
-//            while (resultado.next()){
-//                System.out.print(resultado.getInt("id") +"\t");
-//                System.out.print(resultado.getString("nombre")+"\t");
-//                System.out.print(resultado.getInt("precio")+"\t");
-//                System.out.println(resultado.getDate("fecha_registro"));
-//            }
+
             IRepositorio<Producto> repositorio = new ProductoRepositorioImpl();
-
-
 
             System.out.println("==========================LISTAR==========================");
             repositorio.listar().forEach(System.out::println);
@@ -34,8 +22,5 @@ public class EjemploJdbcDelete
             repositorio.eliminar(3L);
             repositorio.listar().forEach(System.out::println);
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }

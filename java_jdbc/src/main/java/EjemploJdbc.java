@@ -10,37 +10,23 @@ import java.util.Date;
 public class EjemploJdbc
 {
     public static void main(String[] args) {
-        try(
-                Connection conn = ConexionBaseDatos.getInstance()
-//                Statement stmt = conn.createStatement();
-//                ResultSet resultado = stmt.executeQuery("Select * from productos")
-            ) {
-//            while (resultado.next()){
-//                System.out.print(resultado.getInt("id") +"\t");
-//                System.out.print(resultado.getString("nombre")+"\t");
-//                System.out.print(resultado.getInt("precio")+"\t");
-//                System.out.println(resultado.getDate("fecha_registro"));
-//            }
+
+
             IRepositorio<Producto> repositorio = new ProductoRepositorioImpl();
-
-
 
             System.out.println("==========================LISTAR==========================");
             repositorio.listar().forEach(System.out::println);
             System.out.println("==========================POR ID==========================");
             System.out.println(repositorio.porId(1L));
             System.out.println("==========================INSERT==========================");
-            Producto prod = new Producto(0L,"Teclado Red Dragon mecanico",500,new Date());
+            Producto prod = new Producto(0L,"NOTE BOOK ASUS ROG",500,new Date());
             Categoria categoria = new Categoria(3L,"");
             prod.setCategorias(categoria);
-            //Producto prod = new Producto(3L,"Teclado Razer Mecanico",700,new Date());
             repositorio.guardar(prod);
 
             repositorio.listar().forEach(System.out::println);
             System.out.println("==========================Eliminar==========================");
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+/*HASTA AQUI HAY MODIFICACIONES EN BASE DE DATOS SE DEJA EL BACKUP DE TODA LA BD EN el archivo SQL*/
     }
 }

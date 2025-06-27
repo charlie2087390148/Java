@@ -12,9 +12,6 @@ public class ConexionBaseDatos {
     private static String pasword = "";
     private static Connection connection=null;
     public static Connection getInstance() throws SQLException {
-        if (connection == null){
-            connection = DriverManager.getConnection(url,usename,pasword);
-        }
-        return connection;
+        return DriverManager.getConnection(url,usename,pasword);
     }
 }

@@ -17,7 +17,8 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
         List<Producto> productos = new ArrayList<>();
         String sql = "SELECT p.*,c.nombre as categoria FROM productos p inner join categorias c on p.categoria_id = c.id;";
         try (
-                Statement st = getConection().createStatement();
+                Connection conn = getConection();
+                Statement st = conn.createStatement();
                 ResultSet rs = st.executeQuery(sql);
         ){
             while (rs.next()){
@@ -47,7 +48,9 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
     public Producto porId(Long id) {
         Producto producto = null;
         String sql = "SELECT p.*,c.nombre as categoria FROM productos p inner join categorias c on p.categoria_id = c.id WHERE p.id = ?";
-        try(PreparedStatement ps = getConection()
+        try(
+                Connection conn = getConection();
+                PreparedStatement ps = conn
                 .prepareStatement(sql)
         ){
             ps.setLong(1,id);
@@ -69,7 +72,9 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
         } else {
             sql = "INSERT INTO productos( nombre,precio,categoria_id,fecha_registro) VALUES(?,?,?,?)";
         }
-        try (PreparedStatement ps = getConection()
+        try (
+                Connection conn = getConection();
+                PreparedStatement ps = conn
                 .prepareStatement(sql)
         )
         {
@@ -90,7 +95,9 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
 
     @Override
     public void eliminar(Long id) {
-        try (PreparedStatement ps = getConection()
+        try (
+                Connection conn = getConection();
+                PreparedStatement ps = conn
                 .prepareStatement("DELETE FROM productos WHERE id = ?")
         ){
             ps.setLong(1,id);
