@@ -19,7 +19,7 @@ public class EjemploJdbc
             System.out.println("==========================POR ID==========================");
             System.out.println(repositorio.porId(1L));
             System.out.println("==========================INSERT==========================");
-            Producto prod = new Producto(0L,"NOTE BOOK ASUS ROG",500,new Date());
+            Producto prod = new Producto(0L,"Notebook Ommen HP",2900,new Date());
             Categoria categoria = new Categoria(3L,"");
             prod.setCategorias(categoria);
             repositorio.guardar(prod);

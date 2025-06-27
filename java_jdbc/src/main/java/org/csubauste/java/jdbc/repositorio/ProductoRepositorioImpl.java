@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ProductoRepositorioImpl implements IRepositorio<Producto>{
     private Connection getConection() throws SQLException {
-        return ConexionBaseDatos.getInstance();
+        return ConexionBaseDatos.getConnection();
     }
     @Override
     public List<Producto> listar() {
