@@ -1,5 +1,6 @@
 package org.csubauste.java.jdbc.repositorio;
 
+import org.csubauste.java.jdbc.model.Categoria;
 import org.csubauste.java.jdbc.model.Producto;
 import org.csubauste.java.jdbc.util.ConexionBaseDatos;
 
@@ -14,9 +15,10 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
     @Override
     public List<Producto> listar() {
         List<Producto> productos = new ArrayList<>();
+        String sql = "SELECT p.*,c.nombre as categoria FROM productos p inner join categorias c on p.categoria_id = c.id;";
         try (
                 Statement st = getConection().createStatement();
-                ResultSet rs = st.executeQuery("SELECT * FROM productos");
+                ResultSet rs = st.executeQuery(sql);
         ){
             while (rs.next()){
                 Producto p = CreatObjetoProducto(rs);
@@ -34,14 +36,19 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
         p.setNombre(rs.getString("nombre"));
         p.setPrecio(rs.getInt("precio"));
         p.setFecha_registro(rs.getDate("fecha_registro"));
+        Categoria categoria = new Categoria();
+        categoria.setId(rs.getLong("categoria_id"));
+        categoria.setNombre(rs.getString("categoria"));
+        p.setCategorias(categoria);
         return p;
     }
 
     @Override
     public Producto porId(Long id) {
         Producto producto = null;
+        String sql = "SELECT p.*,c.nombre as categoria FROM productos p inner join categorias c on p.categoria_id = c.id WHERE p.id = ?";
         try(PreparedStatement ps = getConection()
-                .prepareStatement("SELECT * FROM productos WHERE id = ?")
+                .prepareStatement(sql)
         ){
             ps.setLong(1,id);
             ResultSet rs = ps.executeQuery();
@@ -58,9 +65,9 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
     public void guardar(Producto o) {
         String sql;
         if (o.getId() != 0 && o.getId() > 0) {
-            sql = "Update productos set nombre = ? ,precio = ?  where id=?";
+            sql = "Update productos set nombre = ? ,precio = ?,categoria_id=?  where id=?";
         } else {
-            sql = "INSERT INTO productos( nombre,precio,fecha_registro) VALUES(?,?,?)";
+            sql = "INSERT INTO productos( nombre,precio,categoria_id,fecha_registro) VALUES(?,?,?,?)";
         }
         try (PreparedStatement ps = getConection()
                 .prepareStatement(sql)
@@ -68,11 +75,11 @@ public class ProductoRepositorioImpl implements IRepositorio<Producto>{
         {
             ps.setString(1,o.getNombre());
             ps.setLong(2, o.getPrecio());
-
+            ps.setLong(3,o.getCategorias().getId());
             if (o.getId() != 0 && o.getId() > 0) {
-                ps.setLong(3, o.getId());
+                ps.setLong(4, o.getId());
             }else{
-                ps.setDate(3, new Date(o.getFecha_registro().getTime()));
+                ps.setDate(4, new Date(o.getFecha_registro().getTime()));
             }
             ps.executeUpdate();
 
