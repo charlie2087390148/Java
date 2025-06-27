@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="08210eb8-654a-4386-b8de-d7d6ada24bf0" name="Changes" comment="Clase singleton">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/EjemploJdbc.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/EjemploJdbc.java" afterDir="false" />
-    </list>
+    <list default="true" id="e58b740f-2a6d-4751-ac2f-e73e60c890fe" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,7 +42,6 @@
     "Application.EjemploJdbc.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Cherry-picking in Singleton",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/CARLOS/OneDrive - Angel light/Documentos/Curso/Java/java_jdbc",
     "settings.editor.selected.configurable": "preferences.keymap"
