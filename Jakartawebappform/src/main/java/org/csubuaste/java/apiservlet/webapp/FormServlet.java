@@ -14,7 +14,7 @@ import java.util.*;
 public class FormServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html");
+        resp.setContentType("text/html;charset=UTF-8");
 
         String usename = req.getParameter("username1");
         String pass  = req.getParameter("password1");
