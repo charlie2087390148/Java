@@ -56,8 +56,8 @@ public class FormServlet extends HttpServlet {
         if (idioma == null) {
             errores.add("debe seleccionar un idioma!");
         }
-        try(PrintWriter out = resp.getWriter()){
         if (errores.isEmpty()) {
+        try(PrintWriter out = resp.getWriter()){
 
                 out.print("<!DOCTYPE html>");
                 out.print("<head>");
@@ -93,17 +93,19 @@ public class FormServlet extends HttpServlet {
                 out.print("</html>");
 
 
-        }else{
-            errores.forEach(err->{
-                out.println("<li>"+err+"</li>");
-            });
-            out.println("<p><a href=\"/Jakartawebappform\">Regresar</a></p>");
-            //req.setAttribute("errores", errores);
-            //getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
-        }
     }catch(Exception ex){
 
     }
+        }else{
+            //errores.forEach(err->{
+            //    out.println("<li>"+err+"</li>");
+            //});
+            //out.println("<p><a href=\"/Jakartawebappform\">Regresar</a></p>");
+            req.setAttribute("errores", errores);
+            /*forward sirve para redirecionar*/
+            getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+
+        }
 
     }
 }
