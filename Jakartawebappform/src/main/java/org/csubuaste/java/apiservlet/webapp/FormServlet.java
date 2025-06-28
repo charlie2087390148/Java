@@ -26,35 +26,37 @@ public class FormServlet extends HttpServlet {
         String idioma = req.getParameter("idioma");
         Boolean Habilitar = req.getParameter("habilitar") != null &&  req.getParameter("habilitar").equals("on");
         String secreto = req.getParameter("secreto");
-        List<String> errores = new ArrayList<>();
-        //Map<String, String> errores = new HashMap<>();
+        //List<String> errores = new ArrayList<>();
+        Map<String, String> errores = new HashMap<>();
 
         if (usename == null || usename.isBlank()) {
-            errores.add("el username es requerido!");
-            //errores.put("username", "el username es requerido!");
+            //errores.add("el username es requerido!");
+            errores.put("username", "el username es requerido!");
         }
         if (pass == null || pass.isBlank()) {
-            errores.add("el password no puede ser vacío!");
-            //errores.put("password", "el password no puede ser vacío!");
+            //errores.add("el password no puede ser vacío!");
+            errores.put("password", "el password no puede ser vacío!");
         }
         if (email == null || !email.contains("@")) {
-            errores.add("el email es requerido y debe tener un formato de correo.");
-            //errores.put("email", "el email es requerido y debe tener un formato de correo.");
+            //errores.add("el email es requerido y debe tener un formato de correo.");
+            errores.put("email", "el email es requerido y debe tener un formato de correo.");
         }
         if (pais == null || pais.equals("") || pais.equals(" ")) {
-            errores.add("el pais es requerido!");
-            //errores.put("pais", "el pais es requerido!");
+            //errores.add("el pais es requerido!");
+            errores.put("pais", "el pais es requerido!");
         }
 
         if (lenguajes == null || lenguajes.length == 0) {
-            errores.add("debe seleccionar al menos un tema.");
-            //errores.put("lenguajes", "debe seleccionar al menos un tema.");
+            //errores.add("debe seleccionar al menos un tema.");
+            errores.put("lenguajes", "debe seleccionar al menos un tema.");
         }
         if (roles == null || roles.length == 0) {
-            errores.add("debe seleccionar al menos un role!");
+            //errores.add("debe seleccionar al menos un role!");
+            errores.put("roles", "debe seleccionar al menos un role!");
         }
         if (idioma == null) {
-            errores.add("debe seleccionar un idioma!");
+            //errores.add("debe seleccionar un idioma!");
+            errores.put("idioma","debe seleccionar un idioma!");
         }
         if (errores.isEmpty()) {
         try(PrintWriter out = resp.getWriter()){
