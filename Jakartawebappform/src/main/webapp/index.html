@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulari de Usuarios</title>
+</head>
+<body>
+    <h3>Formulari de Usuarios</h3>
+    <form action="/Jakartawebappform/registro" method="post">
+        <div>
+            <div>
+                <label for="username">Usuario</label>
+                <input type="text" name="username1" id="username">
+            </div>
+            <div>
+                <label for="password">Contraseña</label>
+                <input type="password" name="password1" id="password">
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="password" name="email" id="email">
+            </div>
+            <div>
+                <label for="pais"></label>
+                <div>
+                    <select name="pais1" id="pais">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="ES">España</option>
+                        <option value="MX">Mexico</option>
+                        <option value="CH">Chile</option>
+                        <option value="AR">Argentina</option>
+                        <option value="PE" selected>Peru</option>
+                        <option value="CO">Colombia</option>
+                        <option value="VE">Venezuela</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <label for="Lenguajes">Leguajes de programacion</label>
+                <div>
+                    <select name="lenguajes1" id="Lenguajes" multiple>
+                        <option value=java" selected>Lenguajes</option>
+                        <option value="jakarta" selected>Jakarta EE</option>
+                        <option value="spring">Spring Boot</option>
+                        <option value="JS">Javascript</option>
+                        <option value="angular">Angular</option>
+                        <option value="react">React</option>
+                    </select>
+                </div>
+                
+            </div>
+            <div>
+                <label>Roles</label>
+                <div>
+                    <input type="checkbox" name="roles" value="ROLE_ADMIN">
+                    <label>Administrador</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="roles" value="ROLE_USE" checked>
+                    <label>Usuario</label>
+                </div>
+                <div>
+                    <input type="checkbox" name="roles" value="ROLE_MODERATOR">
+                    <label>Moderador</label>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <input type="submit" value="Enviar">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
