@@ -10,8 +10,8 @@ public class ProductoServiceImpl implements IProductoService {
     public List<Producto> listar() {
         return Arrays.asList(
                 new Producto(1L,"notebook","Computacion",175000),
-                new Producto(1L,"Escritorio","Oficina",100000),
-                new Producto(1L,"Teclado Mecanico","Computacion",40000)
+                new Producto(2L,"Escritorio","Oficina",100000),
+                new Producto(3L,"Teclado Mecanico","Computacion",40000)
                 );
     }
 }
