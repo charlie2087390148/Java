@@ -6,6 +6,8 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.csubuaste.apiservlet.webapp.headers.services.ILoginService;
+import org.csubuaste.apiservlet.webapp.headers.services.LoginServiceImpl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,26 +21,24 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Cookie[] cookies = req.getCookies()!=null?req.getCookies():new Cookie[0];
-        Optional<String> cookieOptional = Arrays.stream(cookies)
-                .filter(x->"username".equals(x.getName()))
-                //.map(c->c.getValue())
-                .map(Cookie::getValue)
-                .findAny();
+        ILoginService serv = new LoginServiceImpl();
+        Optional<String> cookieOptional = serv.getUsername(req);
 
         if (cookieOptional.isPresent()){
             resp.setContentType("text/html;charset=UTF-8");
 
             try(PrintWriter out = resp.getWriter()){
-            out.println("<!DOCTYPE html>");
-            out.println("<head>");
-            out.println("    <meta charset=\"UTF-8\">");
-            out.println("    <title>Hola "+cookieOptional.get() +"</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("    <h1>Hola "+cookieOptional.get() +" ya has Iniciado Session anteriormente</h1>");
-            out.println("</body>");
-            out.println("</html>");
+                out.println("<!DOCTYPE html>");
+                out.println("<head>");
+                out.println("    <meta charset=\"UTF-8\">");
+                out.println("    <title>Hola "+cookieOptional.get() +"</title>");
+                out.println("</head>");
+                out.println("<body>");
+                out.println("   <p><a href='"+req.getContextPath()+"/index.html'>Volver</a></p>");
+                out.println("   <p><a href='"+req.getContextPath()+"/logout'>LogOut</a></p>");
+                out.println("    <h1>Hola "+cookieOptional.get() +" ya has Iniciado Session con exito</h1>");
+                out.println("</body>");
+                out.println("</html>");
 
             }
         }else{
@@ -59,19 +59,7 @@ public class LoginServlet extends HttpServlet {
             Cookie usernmaeCokie = new Cookie("username",username);
             resp.addCookie(usernmaeCokie);
 
-            try(PrintWriter out = resp.getWriter()){
-                out.println("<!DOCTYPE html>");
-                out.println("<head>");
-                out.println("    <meta charset=\"UTF-8\">");
-                out.println("    <title>Login Correcto</title>");
-                out.println("</head>");
-                out.println("<body>");
-                out.println("    <h1>Login Correcto</h1>");
-                out.println("    <h3>Hola "+username+" ha iniciado session correctamente</h1>");
-
-                out.println("</body>");
-                out.println("</html>");
-            }
+            resp.sendRedirect(req.getContextPath() +"/login.html");
         }else {
             resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             resp.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Lo sentimos usted no esta autorizado para ingresar a esta pagina");
